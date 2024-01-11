@@ -46,6 +46,13 @@ FutureOr<User> userDetail(UserDetailRef ref, int id) async {
     print('[userDetailProvider($id)] disposed');
   });
   final response = await ref.watch(dioProvider).get('/users/$id');
+  ref.keepAlive();
   final user = User.fromJson(response.data);
   return user;
+}
+
+@Riverpod(keepAlive: false)
+FutureOr<int> returnOne(ReturnOneRef ref) {
+  ref.keepAlive();
+  return Future.value(1);
 }
