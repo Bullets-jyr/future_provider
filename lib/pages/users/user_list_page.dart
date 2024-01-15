@@ -10,10 +10,21 @@ class UserListPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userList = ref.watch(userListProvider);
+    print(userList);
+    print('isLoading: ${userList.isLoading}, isRefreshing: ${userList.isRefreshing}, isReloading: ${userList.isReloading}');
+    print('hasValue: ${userList.hasValue}, hasError: ${userList.hasError}');
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('User List'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              ref.invalidate(userListProvider);
+            },
+            icon: const Icon(Icons.refresh),
+          ),
+        ],
       ),
       // body: switch (userList) {
       //   AsyncData(value: final users) => ListView.separated(
@@ -46,33 +57,39 @@ class UserListPage extends ConsumerWidget {
       //     ),
       // },
       body: userList.when(
+        skipLoadingOnRefresh: false,
         data: (users) {
-          return ListView.separated(
-            itemCount: users.length,
-            separatorBuilder: (BuildContext context, int index) {
-              return const Divider();
-            },
-            itemBuilder: (BuildContext context, int index) {
-              final user = users[index];
+          return RefreshIndicator(
+            onRefresh: () async => ref.invalidate(userListProvider),
+            color: Colors.red,
+            child: ListView.separated(
+              physics: const AlwaysScrollableScrollPhysics(),
+              itemCount: users.length,
+              separatorBuilder: (BuildContext context, int index) {
+                return const Divider();
+              },
+              itemBuilder: (BuildContext context, int index) {
+                final user = users[index];
 
-              return GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) {
-                        return UserDetailPage(userId: user.id);
-                      },
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) {
+                          return UserDetailPage(userId: user.id);
+                        },
+                      ),
+                    );
+                  },
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      child: Text(user.id.toString()),
                     ),
-                  );
-                },
-                child: ListTile(
-                  leading: CircleAvatar(
-                    child: Text(user.id.toString()),
+                    title: Text(user.name),
                   ),
-                  title: Text(user.name),
-                ),
-              );
-            },
+                );
+              },
+            ),
           );
         },
         error: (e, st) {
