@@ -6,6 +6,7 @@ linter:
 
 analyzer:
   errors:
+    # freezed를 json_serializable과 함께 사용할 경우
     invalid_annotation_target: ignore
   plugins:
     - custom_lint

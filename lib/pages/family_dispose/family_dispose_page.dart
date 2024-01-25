@@ -33,6 +33,7 @@ class FamilyDisposePage extends ConsumerWidget {
             const SizedBox(height: 20),
             OutlinedButton(
               onPressed: () {
+                // ref.refresh(userDetailProvider);
                 return ref.refresh(userDetailProvider(1));
               },
               child: Text(

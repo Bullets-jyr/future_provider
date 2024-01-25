@@ -14,6 +14,7 @@ part 'users_providers.g.dart';
 //   final response = await ref.watch(dioProvider).get('/users');
 //   // throw 'Fail to fetch user list';
 //   final List userList = response.data;
+//   collection for-loop
 //   final users = [for (final user in userList) User.fromJson(user)];
 //   return users;
 // });
@@ -30,6 +31,7 @@ FutureOr<List<User>> userList(UserListRef ref) async {
   return users;
 }
 
+// 개별 유저 정보
 // final userDetailProvider =
 //     FutureProvider.autoDispose.family<User, int>((ref, id) async {
 //   ref.onDispose(() {
@@ -46,6 +48,7 @@ FutureOr<User> userDetail(UserDetailRef ref, int id) async {
     print('[userDetailProvider($id)] disposed');
   });
   final response = await ref.watch(dioProvider).get('/users/$id');
+  // Provider가 autoDispose Provider일 때만 가능합니다.
   ref.keepAlive();
   final user = User.fromJson(response.data);
   return user;
