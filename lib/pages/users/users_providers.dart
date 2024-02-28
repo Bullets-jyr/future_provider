@@ -6,7 +6,7 @@ import '../../providers/dio_provider.dart';
 
 part 'users_providers.g.dart';
 
-// final userListProvider = FutureProvider<List<User>>((ref) async {
+// final userListProvider = FutureProvider<List<User>>((ref) async { // error
 // final userListProvider = FutureProvider.autoDispose<List<User>>((ref) async {
 //   ref.onDispose(() {
 //     print('[userListProvider] disposed');
@@ -54,6 +54,7 @@ FutureOr<User> userDetail(UserDetailRef ref, int id) async {
   return user;
 }
 
+// @Riverpod(keepAlive: true)
 @Riverpod(keepAlive: false)
 FutureOr<int> returnOne(ReturnOneRef ref) {
   ref.keepAlive();

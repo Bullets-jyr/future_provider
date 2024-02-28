@@ -22,6 +22,7 @@ class FamilyDisposePage extends ConsumerWidget {
           children: [
             OutlinedButton(
               onPressed: () {
+                // 둘 다 가능
                 // ref.invalidate(userDetailProvider);
                 ref.invalidate(userDetailProvider(1));
               },
@@ -33,7 +34,9 @@ class FamilyDisposePage extends ConsumerWidget {
             const SizedBox(height: 20),
             OutlinedButton(
               onPressed: () {
+                // error
                 // ref.refresh(userDetailProvider);
+                // 1가지만 가능
                 return ref.refresh(userDetailProvider(1));
               },
               child: Text(

@@ -9,8 +9,12 @@ class UserListPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // AsyncValue<List<User>>
     final userList = ref.watch(userListProvider);
     print(userList);
+    // isLoading: 데이터를 다시 불러오는 액션에서는 항상 true
+    // isRefreshing: ref.invalidate, ref.refresh를 이용해서 Provider를 강제로 dispose 시킨 후, 새로 데이터를 불러올 때 true
+    // isReloading property에 대해서는 AsyncDetails 섹션에서 설명드립니다.
     print('isLoading: ${userList.isLoading}, isRefreshing: ${userList.isRefreshing}, isReloading: ${userList.isReloading}');
     print('hasValue: ${userList.hasValue}, hasError: ${userList.hasError}');
 
@@ -26,7 +30,9 @@ class UserListPage extends ConsumerWidget {
           ),
         ],
       ),
+      // Object 패턴매칭을 할 때는, named field를 사용해야만 합니다.
       // body: switch (userList) {
+      // AsyncData의 value argument를 users final 변수에 매칭시키겠습니다.
       //   AsyncData(value: final users) => ListView.separated(
       //       itemCount: users.length,
       //       separatorBuilder: (BuildContext context, int index) {
@@ -57,12 +63,15 @@ class UserListPage extends ConsumerWidget {
       //     ),
       // },
       body: userList.when(
+        // Provider가 refresh되었을 때, loading callback을 호출할지 말지를 결정
+        // default값은 true
         skipLoadingOnRefresh: false,
         data: (users) {
           return RefreshIndicator(
             onRefresh: () async => ref.invalidate(userListProvider),
             color: Colors.red,
             child: ListView.separated(
+              // ListView의 Children이 화면 내에 못 있어도 항상 over scroll이 가능해지기 때문입니다.
               physics: const AlwaysScrollableScrollPhysics(),
               itemCount: users.length,
               separatorBuilder: (BuildContext context, int index) {

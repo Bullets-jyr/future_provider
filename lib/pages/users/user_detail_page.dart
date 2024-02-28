@@ -5,6 +5,7 @@ import 'users_providers.dart';
 
 class UserDetailPage extends ConsumerWidget {
   final int userId;
+
   const UserDetailPage({
     super.key,
     required this.userId,
@@ -22,6 +23,8 @@ class UserDetailPage extends ConsumerWidget {
         data: (user) {
           return RefreshIndicator(
             // onRefresh: () => ref.refresh(userDetailProvider(userId).future),
+            // future를 제거하면 future를 return하지 않습니다.
+            // 이럴때는 함수를 async 함수로 바꾸면 됩니다.
             onRefresh: () async => ref.refresh(userDetailProvider(userId)),
             child: ListView(
               physics: const AlwaysScrollableScrollPhysics(),
@@ -80,6 +83,7 @@ class UserDetailPage extends ConsumerWidget {
 class UserInfo extends StatelessWidget {
   final IconData iconData;
   final String userInfo;
+
   const UserInfo({
     Key? key,
     required this.iconData,

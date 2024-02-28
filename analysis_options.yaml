@@ -6,7 +6,9 @@ linter:
 
 analyzer:
   errors:
-    # freezed를 json_serializable과 함께 사용할 경우
+    # freezed를 json_serializable과 함께 사용할 경우, 최신 버전의 json_serializable과 meta package는
+    # invalid_annotation_target warnning을 발생 시킬 수 있습니다. 이 warnning을 disabled 시키기 위해
+    # invalid_annotation_target의 값으로 ignore
     invalid_annotation_target: ignore
   plugins:
     - custom_lint

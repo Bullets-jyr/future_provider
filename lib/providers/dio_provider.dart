@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 
 part 'dio_provider.g.dart';
 
+// autoDispose
 @riverpod
 Dio dio(DioRef ref) {
   return Dio(
