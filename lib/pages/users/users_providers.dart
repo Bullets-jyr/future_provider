@@ -48,7 +48,8 @@ FutureOr<User> userDetail(UserDetailRef ref, int id) async {
     print('[userDetailProvider($id)] disposed');
   });
   final response = await ref.watch(dioProvider).get('/users/$id');
-  // Provider가 autoDispose Provider일 때만 가능합니다.
+  // Provider가 autoDispose Provider일 때만 사용 가능합니다.
+  // http 호출이 끝나면 ref.keepAlive(); 호출합니다.
   ref.keepAlive();
   final user = User.fromJson(response.data);
   return user;

@@ -58,6 +58,8 @@ class UserListPage extends ConsumerWidget {
       //         ),
       //       ),
       //     ),
+      //// switch expression에서는 와이드카드 패턴으 _(언더스코어)를 제공하고 있습니다.
+      //// 이 _(언더스코어) switch statement의 default와 유사합니다.
       //   _ => const Center(
       //       child: CircularProgressIndicator(),
       //     ),
@@ -101,6 +103,7 @@ class UserListPage extends ConsumerWidget {
             ),
           );
         },
+        // StackTrac: 에러 상세
         error: (e, st) {
           return Center(
             child: Text(

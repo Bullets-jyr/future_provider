@@ -6,7 +6,8 @@ part 'user.g.dart';
 
 @freezed
 class User with _$User {
-  // freezed 클래스에 메소드나, getter나 setter를 만드려면, unnamed private constructor를 만들어야합니다.
+  // freezed 클래스에 메소드나, getter나 setter를 만드려면,
+  // unnamed private constructor를 만들어야합니다.
   const User._();
 
   const factory User({
