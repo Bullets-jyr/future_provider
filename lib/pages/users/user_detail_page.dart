@@ -24,9 +24,10 @@ class UserDetailPage extends ConsumerWidget {
           return RefreshIndicator(
             // onRefresh: () => ref.refresh(userDetailProvider(userId).future),
             // future를 제거하면 future를 return하지 않습니다.
-            // 이럴때는 함수를 async 함수로 바꾸면 됩니다.
+            // 이럴 때는 함수를 async 함수로 바꾸면 됩니다.
             onRefresh: () async => ref.refresh(userDetailProvider(userId)),
             child: ListView(
+              // 항상 오버스크롤 가능
               physics: const AlwaysScrollableScrollPhysics(),
               padding: const EdgeInsets.symmetric(
                 vertical: 40,

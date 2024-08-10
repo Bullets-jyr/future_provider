@@ -22,6 +22,7 @@ class FamilyDisposePage extends ConsumerWidget {
           children: [
             OutlinedButton(
               onPressed: () {
+                // ProviderOrFamily
                 // 둘 다 가능
                 // ref.invalidate(userDetailProvider);
                 ref.invalidate(userDetailProvider(1));
@@ -38,7 +39,8 @@ class FamilyDisposePage extends ConsumerWidget {
                 // ref.refresh(userDetailProvider);
                 // 1가지만 가능
                 // 그렇지만... result return
-                // return value를 사용해야할 이유가 없다면 invalidate를 사용하는 것을 선호합니다.
+                // return value를 사용해야할 이유가 없다면
+                // invalidate를 사용하는 것을 선호합니다.
                 return ref.refresh(userDetailProvider(1));
               },
               child: Text(

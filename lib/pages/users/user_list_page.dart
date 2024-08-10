@@ -58,15 +58,15 @@ class UserListPage extends ConsumerWidget {
       //         ),
       //       ),
       //     ),
-      //// switch expression에서는 와이드카드 패턴으 _(언더스코어)를 제공하고 있습니다.
+      //// switch expression에서는 와일드카드 패턴으 _(언더스코어)를 제공하고 있습니다.
       //// 이 _(언더스코어) switch statement의 default와 유사합니다.
       //   _ => const Center(
       //       child: CircularProgressIndicator(),
       //     ),
       // },
       body: userList.when(
-        // Provider가 refresh되었을 때, loading callback을 호출할지 말지를 결정
-        // default값은 true
+        // Provider가 refresh되었을 때, loading callback을 호출할지 말지를 결정합니다.
+        // default값은 true 즉, Provider가 refresh되었을 때는 loading callback을 호출하지 않습니다.
         skipLoadingOnRefresh: false,
         data: (users) {
           return RefreshIndicator(
@@ -103,7 +103,7 @@ class UserListPage extends ConsumerWidget {
             ),
           );
         },
-        // StackTrac: 에러 상세
+        // StackTrace: 에러 상세
         error: (e, st) {
           return Center(
             child: Text(
